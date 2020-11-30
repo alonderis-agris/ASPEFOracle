@@ -1,0 +1,9 @@
+declare
+v_id number;
+v_user_id number := 1;
+v_gateway_id number := 1;
+begin
+select b_billing_seq.nextval into v_id from dual;
+insert into b_billing(id, order_number, b_user_id, amount, b_gateway_id) values 
+(v_id, 'XYZ-123-ABC', v_user_id, 12.00, v_gateway_id);
+end;

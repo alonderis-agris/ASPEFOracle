@@ -1,0 +1,61 @@
+--------------------------------------------------------
+--  DDL for Table B_GATEWAY
+--------------------------------------------------------
+
+  CREATE TABLE "SYS"."B_GATEWAY" 
+   (	"ID" NUMBER, 
+	"CODE" VARCHAR2(20 BYTE), 
+	"NAME" VARCHAR2(300 BYTE)
+   );
+--------------------------------------------------------
+--  DDL for Index B_GATEWAY_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYS"."B_GATEWAY_PK" ON "SYS"."B_GATEWAY" ("ID") ;
+--------------------------------------------------------
+--  Constraints for Table B_GATEWAY
+--------------------------------------------------------
+
+  ALTER TABLE "SYS"."B_GATEWAY" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "SYS"."B_GATEWAY" MODIFY ("CODE" NOT NULL ENABLE);
+  ALTER TABLE "SYS"."B_GATEWAY" MODIFY ("NAME" NOT NULL ENABLE);
+  ALTER TABLE "SYS"."B_GATEWAY" ADD CONSTRAINT "B_GATEWAY_PK" PRIMARY KEY ("ID") ENABLE;
+
+--------------------------------------------------------
+-- Sequences used
+--------------------------------------------------------
+
+CREATE SEQUENCE B_GATEWAY_SEQ INCREMENT BY 1 START WITH 1 MINVALUE 1;
+
+
+  CREATE TABLE "SYS"."B_BILLING" 
+   (	"ID" NUMBER NOT NULL ENABLE, 
+	"ORDER_NUMBER" VARCHAR2(300 BYTE) NOT NULL ENABLE, 
+	"B_USER_ID" NUMBER NOT NULL ENABLE, 
+	"AMOUNT" NUMBER DEFAULT 0 NOT NULL ENABLE, 
+	"B_GATEWAY_ID" NUMBER NOT NULL ENABLE, 
+	"DESCRIPTION" VARCHAR2(1000 BYTE), 
+	 CONSTRAINT "B_BILLING_PK" PRIMARY KEY ("ID") ENABLE, 
+	 CONSTRAINT "B_USER_ID_FK" FOREIGN KEY ("B_USER_ID")
+	  REFERENCES "SYS"."B_USER" ("ID") ENABLE, 
+	 CONSTRAINT "B_GATEWAY_ID_FK" FOREIGN KEY ("B_GATEWAY_ID")
+	  REFERENCES "SYS"."B_GATEWAY" ("ID") ENABLE
+   ) ;
+
+   COMMENT ON COLUMN "SYS"."B_BILLING"."ID" IS 'PK';
+   COMMENT ON COLUMN "SYS"."B_BILLING"."ORDER_NUMBER" IS 'Billing order number';
+   COMMENT ON COLUMN "SYS"."B_BILLING"."B_USER_ID" IS 'User who created billing';
+   COMMENT ON COLUMN "SYS"."B_BILLING"."AMOUNT" IS 'Payable amount';
+   COMMENT ON COLUMN "SYS"."B_BILLING"."B_GATEWAY_ID" IS 'Used gateway';
+   COMMENT ON COLUMN "SYS"."B_BILLING"."DESCRIPTION" IS 'Description of bill';
+
+  CREATE INDEX "SYS"."B_BILLING_GATEWAY_ID_INDX" ON "SYS"."B_BILLING" ("B_GATEWAY_ID") ;
+
+  CREATE INDEX "SYS"."B_BILLING_USER_ID_INDX" ON "SYS"."B_BILLING" ("B_USER_ID") ;
+
+--------------------------------------------------------
+--  DDL for Sequence B_BILLING_SEQ
+--------------------------------------------------------
+
+CREATE SEQUENCE  "SYS"."B_BILLING_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+

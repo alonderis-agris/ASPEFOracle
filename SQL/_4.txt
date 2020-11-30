@@ -1,0 +1,6 @@
+declare
+  v_id number(20);
+begin
+  select b_gateway_seq.nextval into v_id from dual;
+  insert into b_gateway(id, code, name) values (v_id, 'TRP', 'TruePay');
+end;

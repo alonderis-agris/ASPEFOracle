@@ -1,0 +1,1 @@
+Scaffold-DbContext "Data Source=localhost:1521/orcldev; DBA Privilege=SYSDBA; User ID=sys;Password=kututegaMAk2020k;" Oracle.EntityFrameworkCore -OutputDir Models -Tables B_USER,B_GATEWAY,B_BILLING

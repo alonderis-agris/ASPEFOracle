@@ -1,0 +1,30 @@
+--------------------------------------------------------
+--  DDL for Table B_USER
+--------------------------------------------------------
+
+  CREATE TABLE "SYS"."B_USER" 
+   (	"ID" NUMBER, 
+	"NAME" VARCHAR2(50 BYTE), 
+	"PWD" VARCHAR2(300 BYTE)
+   ) ;
+
+   COMMENT ON COLUMN "SYS"."B_USER"."ID" IS 'PK';
+   COMMENT ON COLUMN "SYS"."B_USER"."NAME" IS 'Username';
+--------------------------------------------------------
+--  DDL for Index USER_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYS"."USER_PK" ON "SYS"."B_USER" ("ID") ;
+--------------------------------------------------------
+--  Constraints for Table B_USER
+--------------------------------------------------------
+
+  ALTER TABLE "SYS"."B_USER" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "SYS"."B_USER" MODIFY ("NAME" NOT NULL ENABLE);
+  ALTER TABLE "SYS"."B_USER" MODIFY ("PWD" NOT NULL ENABLE);
+  ALTER TABLE "SYS"."B_USER" ADD CONSTRAINT "USER_PK" PRIMARY KEY ("ID") ENABLE;
+--------------------------------------------------------
+-- Sequences used
+--------------------------------------------------------
+
+CREATE SEQUENCE B_USER_SEQ INCREMENT BY 1 START WITH 1 MINVALUE 1;

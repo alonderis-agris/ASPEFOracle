@@ -1,0 +1,7 @@
+declare
+  v_id number(20);
+begin
+  select b_user_seq.nextval into v_id from dual;
+  insert into b_user(id, name, pwd) values (v_id, 'aa07181', '63a9f0ea7bb98050796b649e85481845');
+end;
+/
